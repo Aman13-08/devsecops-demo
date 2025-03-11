@@ -14,9 +14,9 @@ spec:
       labels:
         app: tic-tac-toe
     spec:
-  containers:
-  - name: tic-tac-toe
-    image: ghcr.io/aman13-08/tictactoe-demo@sha256:a1335a8e2f3297c50b5bb4fb123d91cfd4318820e9a29e2063fe1ab7769fd94c
+      containers:
+      - name: tic-tac-toe
+        image: ghcr.io/aman13-08/ba99ef3fcb05b5365f4f5d086f63734dc00b7d4632cb9a264c6676458faa361c
         # Image will be automatically updated by CI/CD pipeline
         imagePullPolicy: Always
         ports:
