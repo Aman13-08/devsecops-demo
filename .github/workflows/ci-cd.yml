@@ -129,12 +129,13 @@ jobs:
         continue-on-error: true  # ✅ Allow pipeline to continue even if vulnerabilities are found
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ghcr.io/aman13-08/tictactoe-demo:sha-${{ github.sha }}
-          format: 'table'
+          image-ref: ghcr.io/aman13-08/tictactoe-demo:sha-${{ github.sha }}  # Ensure image reference is correct
+          format: 'table'  # Output format as table
           exit-code: '0'  # ✅ Does NOT fail pipeline but logs vulnerabilities
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          ignore-unfixed: true  # Ignore unfixed vulnerabilities
+          vuln-type: 'os,library'  # Scan for OS and library vulnerabilities
+          severity: 'CRITICAL,HIGH'  # Scan for vulnerabilities of severity CRITICAL or HIGH
+
 
       
       - name: Push Docker image
