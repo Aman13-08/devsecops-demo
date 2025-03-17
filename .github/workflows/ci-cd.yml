@@ -125,18 +125,13 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           load: true
       
-      - name: Run Trivy vulnerability scanner
-        continue-on-error: true  # ✅ Allow pipeline to continue even if vulnerabilities are found
-        uses: aquasecurity/trivy-action@master
+      - name: Manual Trivy Setup
+        uses: aquasecurity/setup-trivy@v0.2.0
         with:
-          image-ref: ghcr.io/aman13-08/tictactoe-demo:sha-${{ github.sha }}  # Ensure image reference is correct
-          format: 'table'  # Output format as table
-          exit-code: '0'  # ✅ Does NOT fail pipeline but logs vulnerabilities
-          ignore-unfixed: true  # Ignore unfixed vulnerabilities
-          vuln-type: 'os,library'  # Scan for OS and library vulnerabilities
-          severity: 'CRITICAL,HIGH'  # Scan for vulnerabilities of severity CRITICAL or HIGH
-
-
+              cache: true
+              version: v0.60.0
+      - name: Run Trivy vulnerability scanner
+        run: trivy image --format table ghcr.io/aman13-08/tictactoe-demo:sha-${{ github.sha }} 
       
       - name: Push Docker image
         uses: docker/build-push-action@v5
